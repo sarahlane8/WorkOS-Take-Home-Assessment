@@ -20,6 +20,43 @@ const organizationID = 'org_test_idp'
 const redirectURI = 'http://localhost:8000/callback'
 const state = ''
 
+app.get('/auth', (_req, res) => {
+  // the user’s real organization ID when you finish the integration.
+  // const organization = 'org_01KJNT0BCHTN8KPDN63S71YFV1';
+  const organization = "org_01KJQNKN0M2ZTV63NNACBM43ZH"
+
+  // The callback URI WorkOS should redirect to after the authentication
+//   const redirectUri = 'https://dashboard.my-app.com';
+  const redirectUri = redirectURI;
+
+  const authorizationUrl = workos.sso.getAuthorizationUrl({
+    organization,
+    redirectUri,
+    clientID,
+  });
+
+  res.redirect(authorizationUrl);
+});
+
+app.get('/callback', async (req, res) => {
+  const { code } = req.query;
+
+  const { profile } = await workos.sso.getProfileAndToken({
+    code,
+    clientID,
+  });
+
+    const organization = "org_01KJQNKN0M2ZTV63NNACBM43ZH"
+
+  // Validate that this profile belongs to the organization used for authentication
+  if (profile.organizationId !== organization) {
+    return res.status(401).send({
+      message: 'Unauthorized',
+    });
+  }
+  res.redirect('/');
+});
+
 router.get('/', function (req, res) {
     if (session.isloggedin) {
         res.render('login_successful.ejs', {
