@@ -21,8 +21,7 @@ const redirectURI = 'http://localhost:8000/callback'
 const state = ''
 
 app.get('/auth', (_req, res) => {
-  // the user’s real organization ID when you finish the integration.
-  // const organization = 'org_01KJNT0BCHTN8KPDN63S71YFV1';
+  // Second Test Organization
   const organization = "org_01KJQNKN0M2ZTV63NNACBM43ZH"
 
   // The callback URI WorkOS should redirect to after the authentication
