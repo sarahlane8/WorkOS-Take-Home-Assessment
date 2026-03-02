@@ -17,15 +17,11 @@ app.use(
 const workos = new WorkOS(process.env.WORKOS_API_KEY)
 const clientID = process.env.WORKOS_CLIENT_ID
 const organizationID = 'org_test_idp'
+const organization = "org_01KJQNKN0M2ZTV63NNACBM43ZH"
 const redirectURI = 'http://localhost:8000/callback'
 const state = ''
 
 app.get('/auth', (_req, res) => {
-  // Second Test Organization
-  const organization = "org_01KJQNKN0M2ZTV63NNACBM43ZH"
-
-  // The callback URI WorkOS should redirect to after the authentication
-//   const redirectUri = 'https://dashboard.my-app.com';
   const redirectUri = redirectURI;
 
   const authorizationUrl = workos.sso.getAuthorizationUrl({
@@ -44,8 +40,6 @@ app.get('/callback', async (req, res) => {
     code,
     clientID,
   });
-
-    const organization = "org_01KJQNKN0M2ZTV63NNACBM43ZH"
 
   // Validate that this profile belongs to the organization used for authentication
   if (profile.organizationId !== organization) {
