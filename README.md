@@ -52,7 +52,7 @@ Click **Enterprise SAML** on the home screen to log in via your Okta SAML connec
 After logging in, click the **Directory** button to browse your synced directories. From there you can view the **Users** and **Groups** provisioned from Okta via SCIM.
 
 ## Demo
-
+![demo](https://github.com/user-attachments/assets/a0d6cec7-99ed-44a2-bc7d-b14883b64b05)
 
 ## Useful Links
 
