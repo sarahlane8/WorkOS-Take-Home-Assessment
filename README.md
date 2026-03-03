@@ -95,7 +95,7 @@ This experience reinforced how sensitive SAML integrations can be to configurati
 
 Due to time constraints and scope, the current implementation has a few limitations:
 
-- The Users directory does not display users' email addresses in the appropriate column. This appears to be due to an initial attribute mapping configuration issue. While I attempted to update the mapping, I was unable to resolve it fully within the allotted time.
+- The Users directory does not display users' email addresses in the appropriate column. This appears to be due to an initial attribute mapping configuration issue. While I attempted to update the mapping, I was unable to resolve it fully in a reasonable amount of time.
 
 - A back button from the directory view would improve usability and navigation.
 
@@ -109,6 +109,6 @@ From a Developer Success perspective, this exercise reinforced a few themes:
 
 - Clear setup instructions dramatically reduce integration friction.
 
-- Attribute mapping and configuration validation are common areas where developers may encounter issues.
+- Attribute mapping and configuration validation may be common areas where developers encounter issues.
 
 - Providing realistic, end-to-end example repositories is extremely helpful for developers implementing these features for the first time.
