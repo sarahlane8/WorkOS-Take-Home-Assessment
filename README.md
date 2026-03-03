@@ -1,7 +1,6 @@
 # Sarah Lane's Take Home Assessment 
-Technical WorkOS SSO + Directory Sync Example App
 
-A Node.js application demonstrating [Single Sign-On (SSO)](https://workos.com/docs/sso) and [Directory Sync](https://workos.com/docs/directory-sync) using the [WorkOS Node SDK](https://github.com/workos-inc/workos-node).
+A Node.js application demonstrating [Single Sign-On (SSO)](https://workos.com/docs/sso) and [Directory Sync](https://workos.com/docs/directory-sync).
 
 ## Prerequisites
 
@@ -33,7 +32,7 @@ WORKOS_API_KEY=<workos_api_key>
 WORKOS_CLIENT_ID=<workos_client_id>
 WORKOS_ORGANIZATION_ID=<workos_organization_id>
 ```
-*Please contact me for actual values.
+*Please contact me for actual values or use your own from the [WorkOS Dashboard](https://dashboard.workos.com/) if you created your own accounts/applications.*
 
 ### 4. Start the server
 
@@ -46,10 +45,10 @@ The app will be running at [http://localhost:8000](http://localhost:8000).
 ## Features
 
 ### SSO
-Click **Enterprise SAML** on the home screen to log in via your Okta SAML connection. On successful authentication, your WorkOS profile details are displayed.
+Click **Enterprise SAML** on the home screen to log in via your Okta SAML connection. Upon successful authentication, your WorkOS profile details are displayed.
 
 ### Directory Sync
-After logging in, click the **Directory** button to browse your synced directories. From there you can view the **Users** and **Groups** provisioned from Okta via SCIM.
+After logging in, click the **Directory** button to browse your synced directory. From there, select your directory row to view the **Users** and **Groups** provisioned from Okta via SCIM.
 
 ## Demo
 ![demo](https://github.com/user-attachments/assets/a0d6cec7-99ed-44a2-bc7d-b14883b64b05)
@@ -58,7 +57,6 @@ After logging in, click the **Directory** button to browse your synced directori
 
 - [WorkOS SSO Docs](https://workos.com/docs/sso)
 - [WorkOS Directory Sync Docs](https://workos.com/docs/directory-sync)
-- [WorkOS Node SDK](https://github.com/workos-inc/workos-node)
 - [API Reference](https://workos.com/docs/reference)
 
 ## Reflections, Learnings, and Opportunities for Improvement
@@ -67,10 +65,13 @@ After logging in, click the **Directory** button to browse your synced directori
 
 Through completing this assessment, I gained a deeper understanding of:
 
-- **[Product/SDK/API concept you worked with]** — particularly how [specific mechanism] works in practice.
-- The nuances of **[authentication flow / directory sync / webhook handling / OAuth / etc.]**, especially around [edge case, config detail, error state, etc.].
-- How small configuration mismatches (e.g., [redirect URIs, environment variables, org IDs]) can produce errors that are not always immediately obvious.
-- The importance of carefully reviewing API responses and logs to debug integration issues effectively.
+- SAML authentication flows and how attribute mapping impacts successful login.
+
+- The nuances of Directory Sync and SCIM provisioning, particularly how directory attributes must be correctly configured for user data to display as expected.
+
+- How small configuration mismatches (e.g., redirect URIs, environment variables, organization IDs, or attribute mappings) can produce errors that are not always immediately obvious.
+
+- The importance of carefully reviewing API responses, logs, and dashboard configuration settings to debug integration issues effectively.
 
 This exercise also strengthened my appreciation for the developer experience from the customer’s perspective — especially how critical clear documentation, helpful error messaging, and predictable flows are when integrating identity products.
 
@@ -78,13 +79,13 @@ This exercise also strengthened my appreciation for the developer experience fro
 
 ### Technical Challenges Encountered
 
-Some challenges I ran into included:
+One of the primary challenges I encountered involved SAML authentication.
 
-- **[Specific error or blocker]**
-- **[Environment/config issue]**
-- **[Understanding a specific flow or lifecycle]**
+Initially, clicking the Enterprise SAML button did not automatically authenticate me as expected. Instead, I was redirected to the Test Identity Provider form. After troubleshooting, I determined that the issue stemmed from incorrect attribute mappings in my SAML configuration.
 
-In particular, I spent time troubleshooting **[error message]**, which helped me better understand how [system behavior] works and where guardrails are enforced.
+Once the attribute mappings were corrected, I was able to successfully complete the SSO login flow.
+
+This experience reinforced how sensitive SAML integrations can be to configuration details, and how important precise attribute mapping is to a smooth authentication experience.
 
 ---
 
@@ -92,29 +93,11 @@ In particular, I spent time troubleshooting **[error message]**, which helped me
 
 Due to time constraints and scope, the current implementation has a few limitations:
 
-- Limited validation and error handling around [webhook payloads, token expiration, session management].
-- Minimal UI/UX handling (focused primarily on functionality over polish).
-- Hardcoded values such as [org ID, connection ID, redirect URI] that would ideally be parameterized or environment-driven.
-- No automated tests for [specific flow or logic].
+- The Users directory does not display users' email addresses in the appropriate column. This appears to be due to an initial attribute mapping configuration issue. While I attempted to update the mapping, I was unable to resolve it fully within the allotted time.
+
+- A back button from the directory view would improve usability and navigation.
 
 These were intentional trade-offs to prioritize demonstrating core functionality.
-
----
-
-### If I Had More Time
-
-With additional time, I would improve the implementation by:
-
-- Adding more robust error handling and user-friendly messaging.
-- Refactoring configuration to improve flexibility and maintainability.
-- Adding logging to better trace authentication and provisioning flows.
-- Writing unit and/or integration tests for critical paths.
-- Improving documentation for future developers onboarding to this project.
-- Exploring edge cases such as:
-  - Expired sessions  
-  - Invalid tokens  
-  - Revoked user access  
-  - Multi-organization scenarios  
 
 ---
 
@@ -123,5 +106,7 @@ With additional time, I would improve the implementation by:
 From a Developer Success perspective, this exercise reinforced a few themes:
 
 - Clear setup instructions dramatically reduce integration friction.
-- Common misconfigurations could potentially be surfaced earlier with improved validation or messaging.
+
+- Attribute mapping and configuration validation are common areas where developers may encounter issues.
+
 - Providing realistic, end-to-end example repositories is extremely helpful for developers implementing these features for the first time.
