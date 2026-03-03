@@ -2,6 +2,8 @@
 
 A Node.js application demonstrating [Single Sign-On (SSO)](https://workos.com/docs/sso) and [Directory Sync](https://workos.com/docs/directory-sync).
 
+*To view Written Challenge, please refer to `writtenChallenge.md`*
+
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) v16+

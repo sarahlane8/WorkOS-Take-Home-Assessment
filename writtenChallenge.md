@@ -83,6 +83,6 @@ For more detail on authorization flows, this documentation may be helpful: https
 
 Let me know if you'd like an example of how to parse and validate the state value in your callback — happy to help.
 
-Best,
-Sarah L
+Best,  
+Sarah L  
 Developer Success Engineer
